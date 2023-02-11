@@ -1,0 +1,36 @@
+{% extends 'shop/layouts/main.html' %}
+{% block title %}
+     home page
+{% endblock title %}
+
+{% block content %}
+{% include 'shop/inc/carousel.html' %}
+  <div class="conainer" style="margin-top: 70px;">
+      <div class="row">
+          <div class="col-12"><h1>Trending products</h1></div>
+              {% for item in products %}
+              <div class="col-md-4 col-lg-3">
+                  <div class="card my-16">
+                      <img src="{{item.productimage.url}}" class="card-image-top" alt="categories">
+                      <a href="{% url 'product_details' item.category.name item.name %}">
+                       <div class="card-body">
+                          <h5 class="card-title text-primary">{{item.name}}</h5>
+                           <p class="card-text"><span style=" font-weight: bold;
+                               color: red;" class="float-start"><s>Rs.{{item.original_price | stringformat:'d'}}</s></span>
+                              <span style="
+                               font-weight: bold;
+                               background-color: green;
+                               color: white;
+                               padding: 2px;
+                               border-radius: 5px;" class="float-end">Rs.{{item.selling_price | stringformat:'d'}}</span>
+                          </p>
+       
+                       </div>
+                      </a>
+                      </div>
+                  </div>
+                   {% endfor %}
+          </div>
+      </div>
+  
+{% endblock content %}
